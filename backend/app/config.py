@@ -5,6 +5,12 @@ from pydantic_settings import BaseSettings
 # Load environment variables from .env file if present
 load_dotenv()
 
+DEFAULT_DATABASE_URL = (
+    "sqlite+aiosqlite:////tmp/food_finder.db"
+    if os.getenv("VERCEL")
+    else "sqlite+aiosqlite:///./food_finder.db"
+)
+
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Smart Restaurant Finder - Tamil Nadu Edition"
     API_V1_STR: str = "/api"
@@ -15,7 +21,7 @@ class Settings(BaseSettings):
 
     # Database: Supports PostgreSQL URI via env (e.g. postgresql+asyncpg://user:pass@localhost/dbname)
     # Defaults to local SQLite async database for zero-config instant startup
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./food_finder.db")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", DEFAULT_DATABASE_URL)
     
     # SMTP / Email Simulation settings
     SMTP_SERVER: str = os.getenv("SMTP_SERVER", "smtp.example.com")

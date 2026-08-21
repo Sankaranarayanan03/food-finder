@@ -2,6 +2,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 const RealtimeContext = createContext(null);
+const REALTIME_WS_URL = import.meta.env.VITE_REALTIME_WS_URL;
 
 export function RealtimeProvider({ children }) {
   const [liveUpdates, setLiveUpdates] = useState({});
@@ -13,8 +14,10 @@ export function RealtimeProvider({ children }) {
     let reconnectTimeout = null;
 
     function connect() {
+      if (!REALTIME_WS_URL) return;
+
       try {
-        ws = new WebSocket("ws://127.0.0.1:8000/api/restaurants/ws/live-updates");
+        ws = new WebSocket(REALTIME_WS_URL);
 
         ws.onopen = () => {
           setWsConnected(true);
