@@ -57,11 +57,11 @@ export function AuthProvider({ children }) {
     try {
       let result;
       if (roleType === "customer") {
-        result = await login("arun@example.com", "customer123");
+        result = await login("customer@demo.com", "password123");
       } else if (roleType === "owner") {
-        result = await login("owner@anjappar.tn", "owner123");
+        result = await login("owner@anjappar.com", "password123");
       } else if (roleType === "admin") {
-        result = await login("admin@smartfinder.tn", "admin123");
+        result = await login("admin@srf.com", "password123");
       } else {
         return;
       }
@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
           console.error("Session restore failed, re-logging as customer", err);
           logout();
           try {
-            await login("arun@example.com", "customer123");
+            await login("customer@demo.com", "password123");
           } catch {
             // ignore initial auto-login error
           }
@@ -95,7 +95,7 @@ export function AuthProvider({ children }) {
       } else {
         // No token at all — auto-login as demo customer
         try {
-          await login("arun@example.com", "customer123");
+          await login("customer@demo.com", "password123");
         } catch {
           // ignore initial auto-login error
         }
