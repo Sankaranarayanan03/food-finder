@@ -24,19 +24,19 @@ export function LoginPage({ onLoginSuccess, onNavigate }) {
     setLoading(true);
     try {
       if (demoRoleKey === "CUSTOMER") {
-        setEmail("arun@example.com");
-        setPassword("customer123");
-        const { role: userRole } = await login("arun@example.com", "customer123");
+        setEmail("customer@demo.com");
+        setPassword("password123");
+        const { role: userRole } = await login("customer@demo.com", "password123");
         onLoginSuccess?.(userRole);
       } else if (demoRoleKey === "RESTAURANT_OWNER") {
-        setEmail("owner@anjappar.tn");
-        setPassword("owner123");
-        const { role: userRole } = await login("owner@anjappar.tn", "owner123");
+        setEmail("owner@anjappar.com");
+        setPassword("password123");
+        const { role: userRole } = await login("owner@anjappar.com", "password123");
         onLoginSuccess?.(userRole);
       } else if (demoRoleKey === "ADMIN") {
-        setEmail("admin@smartfinder.tn");
-        setPassword("admin123");
-        const { role: userRole } = await login("admin@smartfinder.tn", "admin123");
+        setEmail("admin@srf.com");
+        setPassword("password123");
+        const { role: userRole } = await login("admin@srf.com", "password123");
         onLoginSuccess?.(userRole);
       }
     } catch (err) {
